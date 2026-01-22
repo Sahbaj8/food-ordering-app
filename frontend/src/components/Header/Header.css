@@ -1,58 +1,152 @@
-.header{
-    height: 34vw;
-    margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-    background-size: contain;
-    position: relative;
-}
-.header-contents{
-    position: absolute;
-    display: flex;
-    flex-direction:column;
-    align-items: start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
-    left: 6vw;
-    animation: fadeIn 3s;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.header-contents h2{
-    font-weight: 500;
-    color: white;
-    font-size: max(4.5vw,22px);
+.header {
+  height: 80vh;
+  min-height: 500px;
+  margin: 0 auto 40px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://images.unsplash.com/photo-1504674900247-087703934569?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.header-contents p{
-    color: white;
-    font-size: 1vw;
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 126, 95, 0.25) 0%, rgba(254, 180, 123, 0.25) 100%);
+  z-index: 1;
 }
 
-.header-contents button{
-    border: none;
-    color: #747474;
-    font-weight: 500;
-    padding: 1vw 2.3vw;
-    background-color: white;
-    font-size: max(1vw,13px);
-    border-radius: 50px;
+.header-contents {
+  position: relative;
+  max-width: 800px;
+  padding: 0 40px;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  animation: fadeIn 1s ease-out;
 }
 
-@media (max-width:1050px){
-    
-    .header-contents{
-        max-width: 45%;
-    }
+.header-contents h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
 }
 
-@media (max-width:750px){
-    .header-contents{
-        max-width: 65%;
-    }
-    .header-contents p{
-        display: none;
-    }
-    .header-contents button{
-        padding: 2vw 4vw;
-    }
+.header-contents h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  color: #ffefd5;
+}
+
+.header-contents p {
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  margin-bottom: 30px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-contents button {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.header-contents button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(90deg, #ff6b4a, #ff9a56);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .header {
+    height: 70vh;
+    min-height: 400px;
+  }
+  
+  .header-contents {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 60vh;
+    min-height: 350px;
+    margin-bottom: 20px;
+  }
+  
+  .header-contents {
+    padding: 0 20px;
+  }
+  
+  .header-contents h1 {
+    font-size: 2.2rem;
+  }
+  
+  .header-contents h2 {
+    font-size: 1.5rem;
+  }
+  
+  .header-contents p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+  
+  .header-contents button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 70vh;
+    min-height: 300px;
+  }
+  
+  .header-contents {
+    padding: 0 15px;
+  }
+  
+  .header-contents h1 {
+    font-size: 1.8rem;
+  }
+  
+  .header-contents h2 {
+    font-size: 1.3rem;
+  }
+  
+  .header-contents p {
+    font-size: 0.9rem;
+  }
 }

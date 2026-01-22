@@ -1,5 +1,11 @@
 import foodModel from "../models/foodModel.js";
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the current module's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 // add food item
@@ -37,13 +43,20 @@ const listFood = async (req,res) => {
 const removeFood = async (req,res) => {
     try{
         const food = await foodModel.findById(req.body.id)
-        fs.unlink(`uploads/${food.image}`,()=>{})
+        const imagePath = path.join(__dirname, '..', 'uploads', food.image);
+        
+        // Check if file exists before trying to delete
+        if (fs.existsSync(imagePath)) {
+            fs.unlink(imagePath, (err) => {
+                if (err) console.error('Error deleting file:', err);
+            });
+        }
 
         await foodModel.findByIdAndDelete(req.body.id)
         res.json({success:true,message:"Food Removed"})
     }catch(error){
-        console.log(error)
-        res.json({success:false,message:"Error"})
+        console.error('Error in removeFood:', error)
+        res.json({success:false,message:"Error removing food"})
     }
 }
 

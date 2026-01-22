@@ -6,6 +6,12 @@ import userRouter from './routes/userRoute.js';
 import 'dotenv/config'
 import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the current module's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //app config
 const app = express()
@@ -20,7 +26,10 @@ connectDB();
 
 //api end point
 app.use("/api/food",foodRouter)
-app.use('/images',express.static('uploads'))
+
+// Serve static files from the uploads directory using absolute path
+const uploadsPath = path.join(__dirname, 'uploads');
+app.use('/images', express.static(uploadsPath));
 app.use('/api/user',userRouter)
 app.use('/api/cart',cartRouter)
 app.use('/api/order',orderRouter)

@@ -48,10 +48,18 @@ const List = ({url}) => {
                 {list.map((item,index)=>{
                     return (
                         <div key={index} className='list-table-format'>
-                            <img src={`${url}/images/`+item.image} alt="" />
+                            <img 
+                                src={`${url}/images/${item.image}`} 
+                                alt={item.name}
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = 'https://via.placeholder.com/100?text=Image+Not+Found';
+                                }}
+                                style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                            />
                             <p>{item.name}</p>
                             <p>{item.category}</p>
-                            <p>${item.price}</p>
+                            <p>₹{item.price}</p>
                             <p onClick={()=>removeFood(item._id)} className='cursor'>X</p>
                         </div>
                     )
